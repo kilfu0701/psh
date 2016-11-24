@@ -1,1 +1,1 @@
-# ptt-code-syntax-highlight
+# ptt-syntax-highlight

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"io"
-	"log"
+	//"log"
 	"os"
 	"strings"
 
@@ -70,7 +70,7 @@ var commands = []*Command{
 func main() {
 	flag.Usage = usage
 	flag.Parse()
-	log.SetFlags(0)
+	//log.SetFlags(0)
 
 	args := flag.Args()
 	if len(args) < 1 {
@@ -91,17 +91,18 @@ func main() {
 		}
 	}
 
-	fmt.Fprintf(os.Stderr, "gobx: unknown subcommand %q\nRun 'gobx help' for usage.\n", args[0])
+	fmt.Fprintf(os.Stderr, "psh: unknown command %q\nRun 'psh help' for usage.\n", args[0])
 	os.Exit(2)
 }
 
 var usageTemplate = `psh (PTT Syntax Highlight) is a syntax highlight tool for PTT.
 Usage:
-    psh file.ext
-    psh [arguments] file.ext
+    psh compile file.ext
+    psh compile -style=default file.ext
+    psh preview file.ext
 `
 
-var helpTemplate = `{{if .Runnable}}usage: gobx {{.UsageLine}}
+var helpTemplate = `{{if .Runnable}}usage: psh {{.UsageLine}}
 {{end}}{{.Long | trim}}
 `
 
@@ -128,7 +129,7 @@ func help(args []string) {
 	}
 
 	if len(args) != 1 {
-		fmt.Fprintf(os.Stdout, "usage: gobx help command\n\nToo many arguments given.\n")
+		fmt.Fprintf(os.Stdout, "usage: psh help command\n\nToo many arguments given.\n")
 		os.Exit(2)
 	}
 
@@ -141,6 +142,6 @@ func help(args []string) {
 		}
 	}
 
-	fmt.Fprintf(os.Stdout, "Unknown help topic %#q.  Run 'gobx help'.\n", arg)
+	fmt.Fprintf(os.Stdout, "Unknown help topic %#q.  Run 'psh help'.\n", arg)
 	os.Exit(2)
 }
